@@ -7,3 +7,4 @@ function show(){if(!last)return;const [a,b]=last,delta=Math.abs(a.net-b.net),tie
 $('comparison').addEventListener('submit',e=>{e.preventDefault();if(!$('comparison').reportValidity())return;if(!$('nameA').value.trim()||!$('nameB').value.trim()||!$('crop').value.trim())return;last=calculate();show();$('result').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});});
 $('reset').addEventListener('click',()=>{ids.forEach((id,i)=>$(id).value=defaults[i]);last=null;$('result').hidden=true;});
 $('language').addEventListener('click',()=>{lang=lang==='en'?'mr':'en';document.documentElement.lang=lang;$('language').textContent=lang==='en'?'मराठी':'English';document.querySelectorAll('[data-en]').forEach(el=>el.textContent=el.dataset[lang]);show();});
+$('comparison').addEventListener('input',()=>{last=null;$('result').hidden=true;});
