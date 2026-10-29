@@ -16,9 +16,22 @@ Working brief: a solo workshop product for Maharashtra, focused on comparing pot
 
 The [DeHaat Play listing](https://play.google.com/store/apps/details?id=app.intspvt.com.farmer) includes a 2020 review praising advisory and doorstep services and another asking for usability improvements. A [third-party review aggregator](https://chrome-stats.com/d/app.intspvt.com.farmer/reviews) summarizes login, task completion, support and fulfilment complaints. These are individual or aggregated reports, not representative farmer research; we have not independently audited a full review sample. Do not say these are the most common complaints across all users.
 
+## Additional Maharashtra-specific competitors
+
+- [Mai Kisaan](https://www.maikisaan.com/) describes a website and mobile apps in English, Hindi and Marathi, a produce marketplace and district-level AGMARKNET prices. Its site says basic browsing and enquiries are free, while a subscription unlocks contact details, full prices and a business directory. Its [Maharashtra onion page](https://www.maikisaan.com/mandi-bhav/onion/maharashtra/) displays dated market-level prices and a seven-day comparison. Pricing, customer numbers, data processing and profitability need separate verification.
+- [Rozbhav](https://rozbhav.in/mandi/maharashtra/commodity/onion/) displays Maharashtra onion prices by district, dates, units and a prior-day comparison and attributes its information to Agmarknet through data.gov.in. It illustrates that dated, regional market comparisons and trends already exist. Its revenue and audience are unknown.
+- [Agri.in](https://agri.in/) displays reported mandi prices, nearby market distance and a 30-day range. Its current commercial model and user count have not been established.
+- [KisanDeals](https://play.google.com/store/apps/details?id=com.app.kisandeals.user) advertises a mobile mandi-price and marketplace app with district-wise pricing; its listing attributes information to official platforms and advises checking them. Do not infer active users or revenue from a download figure.
+
+These strengthen the conclusion that language, no-download websites, prices, trends and nearby market discovery are not by themselves unique. The unvalidated possibility is to combine transparent after-cost calculations, freshness and a simple explanation for a particular farmer's decision. No competitive claim of uniqueness is established.
+
+## Data access investigation
+
+The [official OGD variety-wise dataset](https://data.gov.in/resource/variety-wise-daily-market-prices-data-commodity) lists state, district, market, commodity and variety and says daily granularity. The [CEDA API documentation](https://api.ceda.ashoka.edu.in/documentation/) lists Agmarknet price endpoints; the endpoint details, current coverage, permission to use it and browser accessibility were not verified. Context7 returned no relevant CEDA match and a direct attempt to retrieve its schema failed at the SSL connection in this environment. Do not claim the application has a working live feed.
+
 ## Data and product choices
 
-[Government's daily price dataset](https://www.data.gov.in/catalog/current-daily-price-various-commodities-various-markets-mandi) describes minimum, maximum and modal wholesale prices sourced from Agmarknet. A recorded modal price is not an individual offer. Data freshness, crop variety and units matter. The prototype uses editable **fictional** examples and does not access the feed; the user may enter verified prices manually. No automatic forecasts, routes, market distances, buyer guarantees or official integrations are claimed.
+[Government's daily price dataset](https://www.data.gov.in/catalog/current-daily-price-various-commodities-various-markets-mandi) describes minimum, maximum and modal wholesale prices sourced from Agmarknet. A recorded modal price is not an individual offer. Data freshness, crop variety and units matter. The prototype uses editable **fictional** examples and does not access the feed; the user may enter verified prices manually. A sell-later scenario calculator uses user assumptions, not a forecast. No automatic forecasts, routes, market distances, buyer guarantees or official integrations are claimed. The [OGD help page](https://www.data.gov.in/help) says registered users can generate API keys.
 
 Hypothesis: an easy-to-understand comparison of gross proceeds minus user-entered transport and other costs may help someone reason about where to sell. This is not established as unique: comparable apps already offer prices and transport information. Test with farmers before claiming improved earnings or adoption. Crop and market names in the demo are placeholders; no district was selected without reliable data.
 
