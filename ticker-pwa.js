@@ -26,7 +26,8 @@
   installBtn.id = 'pwa-install-btn';
   installBtn.type = 'button';
   installBtn.className = 'pwa-btn';
-  installBtn.style.display = 'inline-flex'; // always visible by default
+  // Always visible by default
+  installBtn.style.display = 'inline-flex';
   installBtn.innerHTML = `
     <span class="pwa-icon">📲</span>
     <span id="pwa-btn-label" data-en="Install App" data-mr="ॲप इन्स्टॉल करा" data-hi="ऐप इंस्टॉल करें">Install App</span>
@@ -39,6 +40,7 @@
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredInstallPrompt = e;
+    // Keep button visible
     installBtn.style.display = 'inline-flex';
   });
 
@@ -47,7 +49,8 @@
       deferredInstallPrompt.prompt();
       const { outcome } = await deferredInstallPrompt.userChoice;
       if (outcome === 'accepted') {
-        installBtn.style.display = 'none';
+        // Keep button visible even after acceptance
+        installBtn.style.display = 'inline-flex';
       }
       deferredInstallPrompt = null;
       return;
@@ -63,7 +66,8 @@
   });
 
   window.addEventListener('appinstalled', () => {
-    installBtn.style.display = 'none';
+    // Keep button visible after installation
+    installBtn.style.display = 'inline-flex';
   });
 
   // Offline / Online Status Indicator
