@@ -116,15 +116,41 @@ function show(){
   if(!last)return;
   if(canSpeak)speechSynthesis.cancel();
   const [a,b]=last,delta=Math.abs(a.net-b.net),tie=delta<0.005,winner=a.net>b.net?a:b;
-  $('result-title').textContent=tie?t('Both estimates are equal.','दोन्ही अंदाज समान आहेत.','दोनों अनुमान बराबर हैं।'):t(`${winner.name} has the higher estimate.`,`${winner.name} येथे अंदाज जास्त आहे.`,`${winner.name} में अनुमान ज़्यादा है।`);
-  $('result-description').textContent=tie?t('Compare other factors before choosing.','निवड करण्यापूर्वी इतर बाबी तपासा.','चुनने से पहले दूसरी बातें देखें।'):t(`Estimated difference: ${money(delta)} for the whole lot.`,`संपूर्ण मालासाठी अंदाजित फरक: ${money(delta)}.`,`पूरे माल के लिए अनुमानित अंतर: ${money(delta)}.`);
+
+  // --- Arbitrage variance metrics -------------------------------------------
+  const lowerNet=Math.min(a.net,b.net);
+  const pctVariance=lowerNet>0?((delta/lowerNet)*100).toFixed(1):'0.0';
+  const hiPrice=a.price>=b.price?a:b;
+  const loPrice=hiPrice===a?b:a;
+  const negativeTrap=hiPrice.price>loPrice.price&&hiPrice.net<loPrice.net;
+
+  // --- Verdict banner --------------------------------------------------------
+  if(tie){
+    $('result-title').textContent=t('Both estimates are equal.','दोन्ही अंदाज समान आहेत.','दोनों अनुमान बराबर हैं।');
+    $('result-description').textContent=t('Compare other factors before choosing.','निवड करण्यापूर्वी इतर बाबी तपासा.','चुनने से पहले दूसरी बातें देखें।');
+  } else if(negativeTrap){
+    $('result-title').textContent=t('Negative Arbitrage Trap','नकारात्मक आर्बिट्राज सापळा','नकारात्मक आर्बिट्राज जाल');
+    $('result-description').textContent=t(
+      `Higher headline price at ${hiPrice.name} is wiped out by freight costs (-${money(loPrice.net-hiPrice.net)} net loss).`,
+      `${hiPrice.name} येथील जास्त बाजारभाव वाहतूक खर्चामुळे संपला (-${money(loPrice.net-hiPrice.net)} निव्वळ तोटा).`,
+      `${hiPrice.name} का ज़्यादा भाव ढुलाई खर्च से खत्म हो गया (-${money(loPrice.net-hiPrice.net)} शुद्ध नुकसान)।`
+    );
+  } else {
+    $('result-title').textContent=t('Arbitrage Opportunity','आर्बिट्राज संधी','आर्बिट्राज अवसर');
+    $('result-description').textContent=t(
+      `${winner.name} yields +${money(delta)} (+${pctVariance}%) higher net realization after freight.`,
+      `${winner.name} वाहतुकीनंतर +${money(delta)} (+${pctVariance}%) जास्त निव्वळ रक्कम देते.`,
+      `${winner.name} ढुलाई के बाद +${money(delta)} (+${pctVariance}%) ज़्यादा शुद्ध रकम देता है।`
+    );
+  }
+
   $('result-reason').textContent=explain(a,b);
   $('fare-help').textContent=fareNote(a,b);
   $('results').replaceChildren(...last.map(x=>{
     const isWinner = (!tie && x === winner);
     const card=document.createElement('article');
     card.className='result-card' + (isWinner ? ' winner-card' : '');
-    
+
     if (isWinner) {
       const badge = document.createElement('div');
       badge.className = 'winner-badge';
@@ -133,11 +159,55 @@ function show(){
     }
 
     const h=document.createElement('h3');h.textContent=x.name;
-    const gross=document.createElement('p');gross.textContent=t('Estimated sale','अंदाजित विक्री','अनुमानित बिक्री')+'  '+money(x.gross);
-    const costs=document.createElement('p');costs.textContent=t('Transport + other costs','वाहतूक + इतर खर्च','ढुलाई + पल्लेदारी व तुलाई')+'  − '+money(x.transport+x.other);
-    const net=document.createElement('strong');net.textContent=money(x.net);
-    const caption=document.createElement('small');caption.textContent=t('Estimated amount after entered costs','भरलेल्या खर्चानंतर अंदाजित रक्कम','मुनाफा / हाथ में आने वाली रकम');
-    card.append(h,gross,costs,net,caption);return card;
+
+    // --- Financial Waterfall ledger -----------------------------------------
+    const ledger=document.createElement('div');
+    ledger.className='waterfall-ledger';
+
+    const grossRow=document.createElement('div');
+    grossRow.className='ledger-row';
+    const grossLabel=document.createElement('span');
+    grossLabel.textContent=t('Gross Realization','एकूण विक्री','कुल बिक्री');
+    const grossVal=document.createElement('span');
+    grossVal.className='num';
+    grossVal.textContent=money(x.gross);
+    grossRow.append(grossLabel,grossVal);
+
+    const freightPct=x.gross>0?((x.transport/x.gross)*100).toFixed(1):'0.0';
+    const freightRow=document.createElement('div');
+    freightRow.className='ledger-row deduction';
+    const freightLabel=document.createElement('span');
+    freightLabel.textContent=t('Freight & Transit','वाहतूक खर्च','ढुलाई / गाड़ी भाड़ा');
+    const freightVal=document.createElement('span');
+    freightVal.className='num';
+    freightVal.textContent=`-${money(x.transport)} (${freightPct}%)`;
+    freightRow.append(freightLabel,freightVal);
+
+    const levyRow=document.createElement('div');
+    levyRow.className='ledger-row deduction';
+    const levyLabel=document.createElement('span');
+    levyLabel.textContent=t('Statutory APMC Levy','वैधानिक एपीएमसी सेस','वैधानिक एपीएमसी सेस');
+    const levyVal=document.createElement('span');
+    levyVal.className='num';
+    levyVal.textContent=`-${money(x.other)}`;
+    levyRow.append(levyLabel,levyVal);
+
+    const divider=document.createElement('div');
+    divider.className='ledger-divider';
+
+    const netRow=document.createElement('div');
+    netRow.className='ledger-row total';
+    const netLabel=document.createElement('span');
+    netLabel.textContent=t('Net Realized Settlement','निव्वळ हातात येणारी रक्कम','शुद्ध हाथ में आने वाली रकम');
+    const netVal=document.createElement('span');
+    netVal.className='num bold';
+    netVal.textContent=money(x.net);
+    netRow.append(netLabel,netVal);
+
+    ledger.append(grossRow,freightRow,levyRow,divider,netRow);
+
+    card.append(h,ledger);
+    return card;
   }));
   $('result').hidden=false;
   if(canSpeak&&$('speak'))$('speak').hidden=false;
