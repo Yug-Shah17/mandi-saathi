@@ -26,7 +26,7 @@
   installBtn.id = 'pwa-install-btn';
   installBtn.type = 'button';
   installBtn.className = 'pwa-btn';
-  installBtn.style.display = 'none'; // hidden until browser fires beforeinstallprompt
+  installBtn.style.display = 'inline-flex'; // always visible by default
   installBtn.innerHTML = `
     <span class="pwa-icon">📲</span>
     <span id="pwa-btn-label" data-en="Install App" data-mr="ॲप इन्स्टॉल करा" data-hi="ऐप इंस्टॉल करें">Install App</span>
@@ -43,13 +43,23 @@
   });
 
   installBtn.addEventListener('click', async () => {
-    if (!deferredInstallPrompt) return;
-    deferredInstallPrompt.prompt();
-    const { outcome } = await deferredInstallPrompt.userChoice;
-    if (outcome === 'accepted') {
-      installBtn.style.display = 'none';
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installBtn.style.display = 'none';
+      }
+      deferredInstallPrompt = null;
+      return;
     }
-    deferredInstallPrompt = null;
+
+    // Fallback for desktop browsers that don't fire beforeinstallprompt
+    alert(
+      "To install Mandi Saathi on your computer:\n" +
+      "1. Look at your browser address bar (top right) and click the 'Install App' icon (monitor with down arrow).\n" +
+      "2. Or click the 3 dots  -> 'Save and share' -> 'Install Mandi Saathi'.\n" +
+      "It will install as a standalone desktop application!"
+    );
   });
 
   window.addEventListener('appinstalled', () => {
@@ -168,4 +178,3 @@
     buildTicker();
   }
 })();
-
