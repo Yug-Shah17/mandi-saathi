@@ -8,7 +8,8 @@
   // ---------------------------------------------------------------------------
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then(reg => {
+      // Always fetch a fresh copy of the service worker script
+      navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(reg => {
         console.log('Mandi Saathi PWA Service Worker Registered Successfully:', reg.scope);
       }).catch(err => {
         console.warn('Service Worker registration skipped:', err);
