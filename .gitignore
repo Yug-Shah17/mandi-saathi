@@ -1,0 +1,20 @@
+# Agent hosting / project-id metadata
+# These directories contain project IDs linked to external services.
+# They are not API keys but should not be tracked in source history.
+.openai/
+.freebuff/
+
+# Environment variable files — never commit secrets
+.env
+.env.*
+*.env
+
+# Aider AI assistant cache
+.aider*
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Node
+node_modules/

@@ -4,13 +4,13 @@
 Farmers deciding where to sell need more than a high displayed price: transport and other charges can change the amount they take home. Government market reports are useful information, but a reported price is not a guaranteed offer.
 
 ## Our proposed solution
-Mandi Saathi is a lightweight mobile-friendly web prototype that compares two markets using entered quantity, price, transport and other costs. It also lets users explore a sell-later scenario using their own assumed price, waiting costs and spoilage. This scenario is arithmetic, not a forecast or advice to wait. It works without an account or installation. English and Marathi interface text are available. The examples are fictional, not current mandi prices. The app does not connect automatically to a price feed.
+Mandi Saathi is a lightweight mobile-friendly web prototype that compares two markets using entered quantity, price, transport and other costs. It also lets users explore a sell-later scenario using their own assumed price, waiting costs and spoilage. This scenario is arithmetic, not a forecast or advice to wait. It works without an account or installation. English and Marathi interface text are available. Initial numbers are fictional; a separate historical example is labelled with date and source. The app can read a compatible CSV locally but does not connect automatically to a price feed.
 
 ## Live demo
 1. Open the app on a phone or resize the browser.
 2. Explain the visible fictional-data notice. Use five quintals at ₹2,000, transport ₹400 versus ₹2,150, transport ₹1,200.
 3. Calculate. Market A estimates ₹9,600 and Market B ₹9,550. Despite the higher quoted price at B, A is ₹50 higher after the entered costs.
-4. Change the quantity or transport and calculate again. Explain that actual price, quality, fees and availability need checking before travel.
+4. Point to the explanation: B pays ₹150/q more but costs ₹800 more. With those fixed costs the break-even quantity is approximately 5.33 quintals. Change the quantity to 10 and calculate again; B now estimates ₹20,300 versus A's ₹19,600. Explain that actual price, quality, fees and availability need checking before travel, and a real trip's costs might change with quantity.
 5. Switch the interface to Marathi. Show the official source links for the user to check prices.
 6. In the sell-later scenario, the defaults yield ₹10,000 now versus ₹9,950 later after assumed loss and waiting costs, with a break-even later price of ₹2,210.53/qtl. Explain that the future price is entered by the user, not predicted.
 

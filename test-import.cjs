@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const handlers={};
+const elements=new Map();
+const el=id=>{if(!elements.has(id))elements.set(id,{id,hidden:false,files:[],value:'',textContent:'',children:[],selectedIndex:0,addEventListener(type,fn){handlers[id+':'+type]=fn},replaceChildren(){this.children=[]},append(option){this.children.push(option)},dispatchEvent(){},scrollIntoView(){}});return elements.get(id)};
+const context={document:{documentElement:{lang:'en'},getElementById:el,createElement:()=>({value:'',textContent:'',cloneNode(){return {...this}}})},Date,Number,String,Array,Error,Event};
+vm.createContext(context);vm.runInContext(fs.readFileSync('dist/import.js','utf8'),context);
+const parse=vm.runInContext('parseCSV',context);
+assert.deepEqual(JSON.parse(JSON.stringify(parse('A,B\n"x,y","quoted ""text"""\n'))),[['A','B'],['x,y','quoted "text"']]);
+assert.throws(()=>parse('A,B\n"broken'));
+assert.equal(vm.runInContext(`parseDate('31/02/2026')`,context),null);
+assert.equal(vm.runInContext(`parseDate('27/10/2026').toISOString()`,context),'2026-10-27T00:00:00.000Z');
+const fixture=fs.readFileSync('test-fixture.csv','utf8');
+el('csv-file').files=[{size:fixture.length,text:async()=>fixture}];
+(async()=>{await handlers['csv-file:change']();assert.equal(el('csv-rows').children.length,3);el('csv-rows').value='0';el('csv-rows-b').value='1';handlers['csv-load:click']();assert.match(el('csv-message').textContent,/same date/);el('csv-rows').value='1';el('csv-rows-b').value='2';handlers['csv-load:click']();assert.equal(el('nameA').value,'Market One (27/10/2026)');assert.equal(el('transportA').value,'');assert.equal(el('priceB').value,'4100');const mixed=fixture.replace('28/10/2026','27/10/2026');el('csv-file').files=[{size:mixed.length,text:async()=>mixed}];await handlers['csv-file:change']();el('csv-rows').value='0';el('csv-rows-b').value='2';handlers['csv-load:click']();assert.match(el('csv-message').textContent,/same known variety/);el('csv-file').files=[{size:20,text:async()=> 'wrong,headers\nx,y'}];await handlers['csv-file:change']();assert.match(el('csv-message').textContent,/Could not read/);assert.equal(el('csv-results').hidden,true);console.log('CSV parsing, date and variety validation, matching import and missing headers passed.');})().catch(e=>{console.error(e);process.exitCode=1});
