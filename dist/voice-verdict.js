@@ -159,22 +159,45 @@
   // 3. Audio Player: High-Fidelity Server TTS with Browser Fallback
   // ---------------------------------------------------------------------------
   let currentAudio = null;
+  let currentObjectUrl = null;
+
+  function stopCurrentAudio() {
+    if (currentAudio) {
+      try { currentAudio.pause(); } catch (e) { /* ignore */ }
+      currentAudio = null;
+    }
+    if (currentObjectUrl) {
+      try { URL.revokeObjectURL(currentObjectUrl); } catch (e) { /* ignore */ }
+      currentObjectUrl = null;
+    }
+    if (window.speechSynthesis) {
+      try { window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+    }
+  }
 
   async function speakVerdict(rawText, lang = 'en') {
     if (typeof window === 'undefined') return;
 
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio = null;
-    }
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
+    stopCurrentAudio();
+
+    // Guard so the fallback path runs exactly once (no double playback / errors).
+    let settled = false;
 
     const cleanup = () => {
       if (voiceBtn) voiceBtn.classList.remove("playing");
       if (voiceStatus) voiceStatus.textContent = "";
       currentAudio = null;
+      if (currentObjectUrl) {
+        try { URL.revokeObjectURL(currentObjectUrl); } catch (e) { /* ignore */ }
+        currentObjectUrl = null;
+      }
+    };
+
+    const fallbackOnce = () => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      fallbackSpeechSynthesis(rawText, lang);
     };
 
     if (voiceBtn) voiceBtn.classList.add("playing");
@@ -182,24 +205,35 @@
       voiceStatus.textContent = lang === 'mr' ? "🔊 वाचन सुरू आहे..." : lang === 'hi' ? "🔊 बोल रहा है..." : "🔊 Speaking...";
     }
 
-    // Attempt 1: High-fidelity natural Marathi / Hindi audio stream from /api/tts
+    // Attempt 1: High-fidelity natural Marathi / Hindi audio stream from /api/tts.
+    // On serverless hosts (GitHub Pages) this endpoint does not exist, so a 404 /
+    // network failure / empty body is detected and we silently fall back to the
+    // browser's built-in speech synthesis — with no uncaught console errors.
     try {
       const audioUrl = `/api/tts?lang=${encodeURIComponent(lang)}&text=${encodeURIComponent(rawText)}`;
-      const audio = new Audio(audioUrl);
+      const res = await fetch(audioUrl, { method: 'GET' });
+      if (!res.ok) throw new Error("TTS endpoint unavailable (HTTP " + res.status + ")");
+
+      const blob = await res.blob();
+      if (!blob || blob.size === 0) throw new Error("Empty TTS audio response");
+
+      const objectUrl = URL.createObjectURL(blob);
+      currentObjectUrl = objectUrl;
+
+      const audio = new Audio(objectUrl);
       currentAudio = audio;
 
-      audio.onended = cleanup;
-      audio.onerror = () => {
-        // Fallback to browser speechSynthesis if offline
+      audio.onended = () => {
+        settled = true;
         cleanup();
-        fallbackSpeechSynthesis(rawText, lang);
       };
+      audio.onerror = fallbackOnce;
 
       await audio.play();
       return;
     } catch (err) {
-      cleanup();
-      fallbackSpeechSynthesis(rawText, lang);
+      // Seamless fallback to browser speech synthesis.
+      fallbackOnce();
     }
   }
 

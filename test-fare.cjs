@@ -23,4 +23,7 @@ assert.match(vm.runInContext('fareNote({name:\'Market A\',price:2000,transport:4
 vm.runInContext('lang=\'mr\'',ctx);
 const mrNote=vm.runInContext('fareNote({name:\'Market A\',price:2000,transport:400,other:0},{name:\'Market B\',price:2150,transport:1200,other:0})',ctx);
 assert.match(mrNote,/प्रति क्विंटल/);assert.match(mrNote,/1,150/);
-console.log('Fare break-even: representative, equal prices, negative advantage, both directions, other costs, and English/Marathi messages passed.');
+vm.runInContext("lang='hi'",ctx);
+const hiNote=vm.runInContext('fareNote({name:\'Market A\',price:2000,transport:400,other:0},{name:\'Market B\',price:2150,transport:1200,other:0})',ctx);
+assert.match(hiNote,/प्रति क्विंटल/);assert.match(hiNote,/1,150/);assert.match(hiNote,/भाड़ा/);
+console.log('Fare break-even: representative, equal prices, negative advantage, both directions, other costs, and English/Marathi/Hindi messages passed.');

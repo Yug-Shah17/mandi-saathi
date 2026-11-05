@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const elements=new Map(),handlers={};
 const el=id=>{if(!elements.has(id))elements.set(id,{id,value:'',hidden:false,style:{},dataset:{},addEventListener(event,fn){handlers[id+':'+event]=fn},replaceChildren(){},scrollIntoView(){},append(){}});return elements.get(id)};
-const document={getElementById:el,documentElement:{lang:'en'},querySelectorAll:()=>[],createElement:()=>({append(){},textContent:'',className:''})};
+const document={getElementById:el,documentElement:{lang:'en'},querySelectorAll:()=>[],createElement:()=>({append(){},textContent:'',className:''}),addEventListener(){},dispatchEvent(){}};
 const ctx={document,Intl,Number,String,Array,Math,matchMedia:()=>({matches:true})};vm.createContext(ctx);vm.runInContext(fs.readFileSync('dist/app.js','utf8'),ctx);
 Object.entries({quantity:'5',nameA:'A',priceA:'2000',transportA:'400',otherA:'0',nameB:'B',priceB:'2150',transportB:'1200',otherB:'0'}).forEach(([k,v])=>el(k).value=v);
 let r=vm.runInContext('calculate()',ctx);assert.equal(r[0].net,9600);assert.equal(r[1].net,9550);ctx.testRecords=r;assert.match(vm.runInContext('explain(testRecords[0],testRecords[1])',ctx),/5\.33 quintals/);
@@ -10,4 +10,10 @@ el('priceA').value='0';r=vm.runInContext('calculate()',ctx);assert.equal(r[0].ne
 const hctx={document,Intl,Number,String};vm.createContext(hctx);vm.runInContext(fs.readFileSync('dist/hold.js','utf8'),hctx);
 Object.entries({'hold-quantity':'5','hold-now':'2000','hold-later':'2200','hold-cost':'500','hold-loss':'5'}).forEach(([k,v])=>el(k).value=v);
 vm.runInContext('renderHold()',hctx);assert.match(el('hold-output').textContent,/10,000/);assert.match(el('hold-output').textContent,/9,950/);assert.match(el('hold-output').textContent,/2,210\.53/);
-console.log('Two-market, changed quantity, negative proceeds, and hold break-even checks passed.');
+document.documentElement.lang='hi';vm.runInContext('renderHold()',hctx);assert.match(el('hold-output').textContent,/अभी बिक्री/);assert.match(el('hold-output').textContent,/2,210\.53/);
+Object.entries({quantity:'5',priceA:'2000',transportA:'400',otherA:'0',priceB:'2150',transportB:'1200',otherB:'0'}).forEach(([k,v])=>el(k).value=v);
+vm.runInContext('last=calculate()',ctx);vm.runInContext("lang='hi'",ctx);
+const share=vm.runInContext('shareMessage()',ctx);
+assert.match(share,/मंडी भाव/);assert.match(share,/प्रति क्विंटल चालू दर/);assert.match(share,/ढुलाई \/ गाड़ी भाड़ा/);assert.match(share,/पल्लेदारी व तुलाई/);assert.match(share,/मुनाफा \/ हाथ में आने वाली रकम/);
+assert.match(vm.runInContext('explain(testRecords[0],testRecords[1])',ctx),/लगभग 5\.33 क्विंटल/);
+console.log('Two-market, changed quantity, negative proceeds, hold break-even, and Hindi share/explanation checks passed.');

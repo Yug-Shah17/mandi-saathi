@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#082f1e"/>
+      <stop offset="100%" stop-color="#04180f"/>
+    </linearGradient>
+    <linearGradient id="onion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="sprout" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+  <!-- App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#10b981" stroke-width="6" stroke-opacity="0.35"/>
+  
+  <!-- Sprout / Leaf Stem -->
+  <path d="M256 120 C240 70, 210 50, 180 60 C180 100, 220 120, 256 130 Z" fill="url(#sprout)"/>
+  <path d="M256 120 C272 70, 302 50, 332 60 C332 100, 292 120, 256 130 Z" fill="url(#sprout)"/>
+  <line x1="256" y1="60" x2="256" y2="140" stroke="#059669" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Golden Onion Body -->
+  <path d="M256 130 C160 130, 96 210, 96 300 C96 390, 165 440, 256 440 C347 440, 416 390, 416 300 C416 210, 352 130, 256 130 Z" fill="url(#onion)"/>
+  <!-- Highlights & Layer Lines -->
+  <path d="M256 140 C200 170, 160 230, 160 300 C160 370, 200 420, 256 430" fill="none" stroke="#fef3c7" stroke-width="7" stroke-linecap="round" stroke-opacity="0.6"/>
+  <path d="M256 140 C312 170, 352 230, 352 300 C352 370, 312 420, 256 430" fill="none" stroke="#78350f" stroke-width="6" stroke-linecap="round" stroke-opacity="0.35"/>
+  <line x1="256" y1="140" x2="256" y2="435" stroke="#fef3c7" stroke-width="6" stroke-linecap="round" stroke-opacity="0.4"/>
+  
+  <!-- Rupee Symbol on Center of Onion -->
+  <text x="256" y="325" font-family="Arial, sans-serif" font-size="95" font-weight="900" fill="#ffffff" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">₹</text>
+  
+  <!-- Root tuft -->
+  <path d="M240 440 L235 465 M256 440 L256 470 M272 440 L277 465" stroke="#fef3c7" stroke-width="6" stroke-linecap="round"/>
+</svg>
+

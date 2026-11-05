@@ -20,3 +20,53 @@ select{width:100%;padding:13px 14px;border:1px solid #bdcbbb;border-radius:5px;f
 .arbitrage-trap{margin-top:14px;padding:12px 16px;border-radius:6px;background:#fef2f2;border:1px dashed #fca5a5;color:#7f1d1d;font-size:13px}
 /* Source section padding fix */
 @media(max-width:700px){.source{padding-left:5%}}
+
+/* Result Action Bar & WhatsApp Share Button */
+.result-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.result-actions button.share,
+#whatsapp-share-btn {
+  background: #25d366 !important;
+  color: #ffffff !important;
+  border: 1px solid #1ebe5d !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  border-radius: 9999px !important;
+  padding: 10px 20px !important;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3) !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: transform 0.15s ease !important;
+}
+
+.result-actions button.share:hover,
+#whatsapp-share-btn:hover {
+  background: #1ebe5d !important;
+  transform: translateY(-1px) !important;
+}
+
+.result-actions button.listen {
+  background: #064e3b !important;
+  color: #ecfdf5 !important;
+  border: 1px solid #059669 !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  border-radius: 9999px !important;
+  padding: 10px 20px !important;
+  cursor: pointer !important;
+}
+
+/* Crop selection required state */
+.ticker-hidden {
+  display: none !important;
+}
