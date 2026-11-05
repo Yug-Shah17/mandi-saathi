@@ -1,5 +1,5 @@
 const ids=['crop','quantity','nameA','priceA','transportA','otherA','nameB','priceB','transportB','otherB'];
-const defaults=['Onion','5','Market A','2000','400','0','Market B','2150','1200','0'];
+const defaults=['Onion','5','Lasalgaon APMC','3900','400','0','Pimpalgaon Baswant','4400','1200','0'];
 const $=id=>document.getElementById(id); let lang='en', last=null;
 const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
 const canSpeak=typeof window!=='undefined'&&'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;
@@ -210,7 +210,10 @@ function show(){
     return card;
   }));
   $('result').hidden=false;
-  if(canSpeak&&$('speak'))$('speak').hidden=false;
+  if(canSpeak && $('speak')) {
+    $('speak').hidden = false;
+    $('speak').style.display = 'inline-flex';
+  }
   if($('share')){ $('share').hidden=false; $('share').style.display='inline-flex'; }
 
   // Trigger rich voice verdict banner update
