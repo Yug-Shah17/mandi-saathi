@@ -59,7 +59,7 @@ async function fetchMandiRecords(url) {
 
     // Never throws — falls back to static data automatically.
     const result = await fetchMandiRecords(
-      "/api/mandi-prices?state=Maharashtra&district=Nashik&commodity=Onion"
+      "`/api/mandi-prices?state=Maharashtra&district=Nashik&commodity=${encodeURIComponent((document.getElementById('crop') && document.getElementById('crop').value) || 'Onion')}`"
     );
     currentRecords = result.records;
 
@@ -67,7 +67,7 @@ async function fetchMandiRecords(url) {
       ? "🟢 Live Agmarknet Data (data.gov.in)"
       : "🟡 Verified Offline Snapshot";
     if (liveStatus) {
-      liveStatus.textContent = `${badgeText} · Loaded ${currentRecords.length} markets for Nashik Onion.`;
+      liveStatus.textContent = `${badgeText} · Loaded ${currentRecords.length} markets for Nashik ${((document.getElementById('crop') && document.getElementById('crop').value) || 'Onion')}.`;
     }
 
     // Populate dropdowns
@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
       pills.forEach(function(p) { p.classList.remove('active'); });
       pill.classList.add('active');
       const crop = pill.getAttribute('data-crop') || 'Onion';
+      // Sync crop input field
+      var cropInput = document.getElementById('crop');
+      if (cropInput) cropInput.value = crop;
+      // Dispatch cropSelected event so ticker unhides & refreshes
+      window.dispatchEvent(new CustomEvent('cropSelected', { detail: { crop: crop } }));
       // Never rejects — falls back to static data on GitHub Pages / offline.
       fetchMandiRecords('/api/mandi-prices?commodity=' + encodeURIComponent(crop))
         .then(function(result) {
