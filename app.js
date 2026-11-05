@@ -211,7 +211,7 @@ function show(){
   }));
   $('result').hidden=false;
   if(canSpeak&&$('speak'))$('speak').hidden=false;
-  if($('share'))$('share').hidden=false;
+  if($('share')){ $('share').hidden=false; $('share').style.display='inline-flex'; }
 
   // Trigger rich voice verdict banner update
   if(window.updateVerdict){
