@@ -7321,6 +7321,10 @@ button.submit:active, .cta:active {
   display: none !important;
 }
 
+.ticker-wrapper:not(.ticker-hidden) {
+  display: flex !important;
+}
+
 /* ============================================================
    IMPECCABLE DESIGN ELEVATION (AGRI-FINTECH POLISH)
    Glassmorphism, tactile depth, subtle glow, refined telemetry
@@ -8658,8 +8662,14 @@ button.submit:active, .cta:active {
 }
 
 
-/* Hide duplicate injected share & listen boxes */
+/* WhatsApp share card styled and visible */
 #share-box {
+  display: flex !important;
+  margin-top: 24px !important;
+}
+
+/* Hide duplicate bottom action buttons */
+.result-actions {
   display: none !important;
 }
 

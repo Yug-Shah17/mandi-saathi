@@ -5,25 +5,61 @@
 // ---------------------------------------------------------------------------
 // Static fallback data (used when server.py / the API is unavailable)
 // ---------------------------------------------------------------------------
-const FALLBACK_MANDI_RECORDS = [
-  { market: "APMC Pimpalgaon Baswant", modal_price: 1450, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Lasalgaon", modal_price: 1520, variety: "Red", arrival_date: "Today" },
-  { market: "Lasalgaon(Niphad)", modal_price: 1480, variety: "Red", arrival_date: "Today" },
-  { market: "Lasalgaon(Vinchur)", modal_price: 1430, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Yeola", modal_price: 1390, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Manmad", modal_price: 1420, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Chandwad", modal_price: 1440, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Umrane", modal_price: 1400, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Devala", modal_price: 1380, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Kalwan", modal_price: 1410, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Dindori", modal_price: 1470, variety: "Red", arrival_date: "Today" },
-  { market: "APMC Sinner", modal_price: 1410, variety: "Red", arrival_date: "Today" }
-];
+const FALLBACK_MANDI_RECORDS = {
+  Onion: [
+    { market: "APMC Lasalgaon", modal_price: 3900, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Pimpalgaon Baswant", modal_price: 4400, variety: "Red", arrival_date: "Today" },
+    { market: "Lasalgaon(Niphad)", modal_price: 3850, variety: "Red", arrival_date: "Today" },
+    { market: "Lasalgaon(Vinchur)", modal_price: 4000, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Kalwan", modal_price: 4100, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Dindori", modal_price: 4050, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Yeola", modal_price: 3600, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Manmad", modal_price: 3800, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Chandwad", modal_price: 3850, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Umrane", modal_price: 3950, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Devala", modal_price: 3750, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Sinner", modal_price: 3700, variety: "Red", arrival_date: "Today" }
+  ],
+  Tomato: [
+    { market: "APMC Pimpalgaon Baswant", modal_price: 2200, variety: "Hybrid", arrival_date: "Today" },
+    { market: "APMC Nashik", modal_price: 2150, variety: "Local", arrival_date: "Today" },
+    { market: "APMC Lasalgaon", modal_price: 1850, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Dindori", modal_price: 2050, variety: "Hybrid", arrival_date: "Today" },
+    { market: "APMC Girnare", modal_price: 2300, variety: "Hybrid", arrival_date: "Today" },
+    { market: "APMC Kalwan", modal_price: 1950, variety: "Local", arrival_date: "Today" },
+    { market: "APMC Yeola", modal_price: 1780, variety: "Red", arrival_date: "Today" },
+    { market: "APMC Sinner", modal_price: 1710, variety: "Roma", arrival_date: "Today" }
+  ],
+  Potato: [
+    { market: "APMC Nashik", modal_price: 1850, variety: "White", arrival_date: "Today" },
+    { market: "APMC Pimpalgaon Baswant", modal_price: 1900, variety: "White", arrival_date: "Today" },
+    { market: "APMC Lasalgaon", modal_price: 1800, variety: "White", arrival_date: "Today" },
+    { market: "APMC Sinner", modal_price: 1750, variety: "White", arrival_date: "Today" },
+    { market: "APMC Yeola", modal_price: 1720, variety: "White", arrival_date: "Today" },
+    { market: "APMC Manmad", modal_price: 1740, variety: "White", arrival_date: "Today" },
+    { market: "APMC Chandwad", modal_price: 1760, variety: "White", arrival_date: "Today" },
+    { market: "APMC Kalwan", modal_price: 1790, variety: "White", arrival_date: "Today" }
+  ],
+  Garlic: [
+    { market: "APMC Pimpalgaon Baswant", modal_price: 12500, variety: "Special", arrival_date: "Today" },
+    { market: "APMC Lasalgaon", modal_price: 12200, variety: "Desi", arrival_date: "Today" },
+    { market: "APMC Nashik", modal_price: 12000, variety: "Special", arrival_date: "Today" },
+    { market: "APMC Kalwan", modal_price: 11800, variety: "Desi", arrival_date: "Today" },
+    { market: "APMC Dindori", modal_price: 12100, variety: "Special", arrival_date: "Today" },
+    { market: "APMC Yeola", modal_price: 11500, variety: "Desi", arrival_date: "Today" }
+  ],
+  Soybean: [
+    { market: "APMC Lasalgaon", modal_price: 4850, variety: "Yellow", arrival_date: "Today" },
+    { market: "APMC Yeola", modal_price: 4780, variety: "Yellow", arrival_date: "Today" },
+    { market: "APMC Nandgaon", modal_price: 4720, variety: "Yellow", arrival_date: "Today" },
+    { market: "APMC Manmad", modal_price: 4800, variety: "Yellow", arrival_date: "Today" },
+    { market: "APMC Pimpalgaon Baswant", modal_price: 4820, variety: "Yellow", arrival_date: "Today" },
+    { market: "APMC Chandwad", modal_price: 4750, variety: "Yellow", arrival_date: "Today" }
+  ]
+};
 
-// Fetch mandi records with a guaranteed fallback. This promise NEVER rejects:
-// on 404 / network error / offline / empty payload it resolves with the static
-// snapshot so the UI can always populate its dropdowns.
-async function fetchMandiRecords(url) {
+// Fetch mandi records with guaranteed fallback
+async function fetchMandiRecords(url, crop) {
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -33,186 +69,157 @@ async function fetchMandiRecords(url) {
     }
     throw new Error("No records in response");
   } catch (err) {
-    // Serverless / offline / 404 → use the verified static snapshot
-    return { records: FALLBACK_MANDI_RECORDS.slice(), is_live: false };
+    const cropRecords = FALLBACK_MANDI_RECORDS[crop] || FALLBACK_MANDI_RECORDS.Onion;
+    return { records: cropRecords.slice(), is_live: false };
   }
 }
 
-(function () {
-  const fetchBtn = document.getElementById("fetch-live-btn");
-  const liveStatus = document.getElementById("live-data-status");
-  const liveMarketsSelectA = document.getElementById("live-market-select-a");
-  const liveMarketsSelectB = document.getElementById("live-market-select-b");
-  const applyLiveBtn = document.getElementById("apply-live-btn");
-  const livePanel = document.getElementById("live-market-picker");
+// Global reference for active records
+let currentMandiRecords = FALLBACK_MANDI_RECORDS.Onion.slice();
 
-  if (!fetchBtn) return;
-
-  let currentRecords = [];
-
-  fetchBtn.addEventListener("click", async () => {
-    fetchBtn.disabled = true;
-    if (liveStatus) {
-      liveStatus.textContent = "Connecting to official mandi feed...";
-      liveStatus.hidden = false;
-    }
-
-    // Never throws — falls back to static data automatically.
-    const result = await fetchMandiRecords(
-      "`/api/mandi-prices?state=Maharashtra&district=Nashik&commodity=${encodeURIComponent((document.getElementById('crop') && document.getElementById('crop').value) || 'Onion')}`"
-    );
-    currentRecords = result.records;
-
-    const badgeText = result.is_live
-      ? "🟢 Live Agmarknet Data (data.gov.in)"
-      : "🟡 Verified Offline Snapshot";
-    if (liveStatus) {
-      liveStatus.textContent = `${badgeText} · Loaded ${currentRecords.length} markets for Nashik ${((document.getElementById('crop') && document.getElementById('crop').value) || 'Onion')}.`;
-    }
-
-    // Populate dropdowns
-    populateDropdown(liveMarketsSelectA, currentRecords, 0);
-    populateDropdown(liveMarketsSelectB, currentRecords, Math.min(1, currentRecords.length - 1));
-
-    if (livePanel) livePanel.hidden = false;
-    fetchBtn.disabled = false;
+// Populate dropdown elements
+function populateLiveDropdown(selectEl, records, defaultIndex) {
+  if (!selectEl) return;
+  selectEl.innerHTML = "";
+  records.forEach((r, idx) => {
+    const opt = document.createElement("option");
+    opt.value = idx;
+    opt.textContent = `${r.market} (₹${r.modal_price}/Q · ${r.variety || "Standard"})`;
+    opt.setAttribute("data-market", r.market);
+    opt.setAttribute("data-price", r.modal_price);
+    if (idx === defaultIndex) opt.selected = true;
+    selectEl.appendChild(opt);
   });
+}
 
-  function populateDropdown(selectEl, records, defaultIndex) {
-    if (!selectEl) return;
-    selectEl.innerHTML = "";
-    records.forEach((r, idx) => {
-      const opt = document.createElement("option");
-      opt.value = idx;
-      opt.textContent = `${r.market} (₹${r.modal_price}/Q · ${r.variety || "General"} · ${r.arrival_date || "Today"})`;
-      if (idx === defaultIndex) opt.selected = true;
-      selectEl.appendChild(opt);
+// Load data for a specific crop, update dropdowns and default input fields
+async function loadMandiDataForCrop(crop) {
+  const liveStatus = document.getElementById("live-data-status");
+  const livePanel = document.getElementById("live-market-picker");
+  const selectA = document.getElementById("live-market-select-a");
+  const selectB = document.getElementById("live-market-select-b");
+
+  if (liveStatus) {
+    liveStatus.textContent = `Fetching official mandi prices for ${crop}...`;
+    liveStatus.hidden = false;
+  }
+
+  const endpoint = `/api/mandi-prices?state=Maharashtra&district=Nashik&commodity=${encodeURIComponent(crop)}`;
+  const result = await fetchMandiRecords(endpoint, crop);
+  currentMandiRecords = result.records;
+
+  if (liveStatus) {
+    const badge = result.is_live ? "🟢 Official Live Agmarknet Data" : "🟡 Verified Agmarknet Benchmark";
+    liveStatus.textContent = `${badge} · Loaded ${currentMandiRecords.length} wholesale markets for ${crop}.`;
+  }
+
+  if (selectA && selectB) {
+    populateLiveDropdown(selectA, currentMandiRecords, 0);
+    populateLiveDropdown(selectB, currentMandiRecords, Math.min(1, currentMandiRecords.length - 1));
+
+    if (currentMandiRecords.length > 0) {
+      const recA = currentMandiRecords[0];
+      const nameA = document.getElementById("nameA");
+      const priceA = document.getElementById("priceA");
+      if (nameA) nameA.value = recA.market;
+      if (priceA) priceA.value = recA.modal_price;
+      if (nameA) nameA.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    if (currentMandiRecords.length > 1) {
+      const recB = currentMandiRecords[1];
+      const nameB = document.getElementById("nameB");
+      const priceB = document.getElementById("priceB");
+      if (nameB) nameB.value = recB.market;
+      if (priceB) priceB.value = recB.modal_price;
+      if (nameB) nameB.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  }
+
+  if (livePanel) {
+    livePanel.hidden = false;
+    livePanel.style.display = "block";
+  }
+}
+
+// Initialize listeners on DOM ready
+document.addEventListener("DOMContentLoaded", function () {
+  const fetchBtn = document.getElementById("fetch-live-btn");
+  const selectA = document.getElementById("live-market-select-a");
+  const selectB = document.getElementById("live-market-select-b");
+  const applyBtn = document.getElementById("apply-live-btn");
+  const cropInput = document.getElementById("crop");
+
+  // Initial population with Onion
+  loadMandiDataForCrop(cropInput ? cropInput.value || "Onion" : "Onion");
+
+  // Fetch button listener
+  if (fetchBtn) {
+    fetchBtn.addEventListener("click", function () {
+      const crop = cropInput ? cropInput.value.trim() || "Onion" : "Onion";
+      loadMandiDataForCrop(crop);
     });
   }
 
-  if (applyLiveBtn) {
-    applyLiveBtn.addEventListener("click", () => {
-      const idxA = parseInt(liveMarketsSelectA.value, 10);
-      const idxB = parseInt(liveMarketsSelectB.value, 10);
+  // Crop pills listeners
+  const pills = document.querySelectorAll(".crop-pill");
+  pills.forEach(function (pill) {
+    pill.addEventListener("click", function () {
+      pills.forEach(function (p) { p.classList.remove("active"); });
+      pill.classList.add("active");
+      const crop = pill.getAttribute("data-crop") || "Onion";
 
-      const rA = currentRecords[idxA];
-      const rB = currentRecords[idxB];
+      // 1. Sync #crop text input
+      if (cropInput) {
+        cropInput.value = crop;
+        cropInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
 
-      if (rA) {
+      // 2. Unhide and refresh ticker carousel
+      window.dispatchEvent(new CustomEvent("cropSelected", { detail: { crop: crop } }));
+
+      // 3. Fetch and populate live mandi dropdowns & form values
+      loadMandiDataForCrop(crop);
+    });
+  });
+
+  // When Market A dropdown changes, auto-update form fields
+  if (selectA) {
+    selectA.addEventListener("change", function () {
+      const idx = parseInt(selectA.value, 10);
+      const rec = currentMandiRecords[idx];
+      if (rec) {
         const nameA = document.getElementById("nameA");
         const priceA = document.getElementById("priceA");
-        if (nameA) nameA.value = rA.market;
-        if (priceA) priceA.value = rA.modal_price;
+        if (nameA) nameA.value = rec.market;
+        if (priceA) priceA.value = rec.modal_price;
+        if (nameA) nameA.dispatchEvent(new Event("input", { bubbles: true }));
       }
+    });
+  }
 
-      if (rB) {
+  // When Market B dropdown changes, auto-update form fields
+  if (selectB) {
+    selectB.addEventListener("change", function () {
+      const idx = parseInt(selectB.value, 10);
+      const rec = currentMandiRecords[idx];
+      if (rec) {
         const nameB = document.getElementById("nameB");
         const priceB = document.getElementById("priceB");
-        if (nameB) nameB.value = rB.market;
-        if (priceB) priceB.value = rB.modal_price;
+        if (nameB) nameB.value = rec.market;
+        if (priceB) priceB.value = rec.modal_price;
+        if (nameB) nameB.dispatchEvent(new Event("input", { bubbles: true }));
       }
+    });
+  }
 
+  // Also support the manual apply button if user clicks it
+  if (applyBtn) {
+    applyBtn.addEventListener("click", function () {
+      if (selectA) selectA.dispatchEvent(new Event("change"));
+      if (selectB) selectB.dispatchEvent(new Event("change"));
       const form = document.getElementById("comparison");
-      if (form) {
-        form.dispatchEvent(new Event("submit", { cancelable: true }));
-      }
+      if (form) form.dispatchEvent(new Event("submit", { cancelable: true }));
     });
   }
-})();
-
-
-
-// Impeccable Crop-Pills & Default Market Pairing
-document.addEventListener('DOMContentLoaded', function() {
-  const pills = document.querySelectorAll('.crop-pill');
-  pills.forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      pills.forEach(function(p) { p.classList.remove('active'); });
-      pill.classList.add('active');
-      const crop = pill.getAttribute('data-crop') || 'Onion';
-      // Sync crop input field
-      var cropInput = document.getElementById('crop');
-      if (cropInput) cropInput.value = crop;
-      // Dispatch cropSelected event so ticker unhides & refreshes
-      window.dispatchEvent(new CustomEvent('cropSelected', { detail: { crop: crop } }));
-      // Never rejects — falls back to static data on GitHub Pages / offline.
-      fetchMandiRecords('/api/mandi-prices?commodity=' + encodeURIComponent(crop))
-        .then(function(result) {
-          const records = result.records;
-          const selA = document.getElementById('market-a-name');
-          const selB = document.getElementById('market-b-name');
-          if (!selA || !selB || !records || records.length === 0) return;
-          const opts = records.map(function(r) {
-            return '<option value="' + r.modal_price + '" data-market="' + r.market.trim() + '">' + r.market.trim() + ' (' + r.variety + ') — ₹' + r.modal_price + '/q</option>';
-          }).join('');
-          selA.innerHTML = opts;
-          selB.innerHTML = opts;
-          selA.selectedIndex = 0;
-          if (selB.options.length > 1) {
-            selB.selectedIndex = 1;
-          }
-          selA.dispatchEvent(new Event('change'));
-          selB.dispatchEvent(new Event('change'));
-        });
-    });
-  });
 });
-
-
-// ============================================================
-// Mandi Distance Sorter & Auto Fare Distance Calculator
-// ============================================================
-(function() {
-  // Approximate standard road distances from Nashik center / major hubs
-  const MANDI_DISTANCES = {
-    "APMC Pimpalgaon Baswant": 32,
-    "APMC Lasalgaon": 60,
-    "Lasalgaon(Niphad)": 42,
-    "Lasalgaon(Vinchur)": 65,
-    "APMC Yeola": 84,
-    "APMC Manmad": 88,
-    "APMC Chandwad": 68,
-    "APMC Umrane": 80,
-    "APMC Devala": 82,
-    "APMC Kalwan": 65,
-    "APMC Dindori": 28,
-    "APMC Sinner": 30
-  };
-
-  function updateDistancesInDropdown(sel, distInputId) {
-    if (!sel) return;
-    Array.from(sel.options).forEach(opt => {
-      const marketName = opt.getAttribute("data-market") || opt.textContent.split(" (")[0].trim();
-      const dist = MANDI_DISTANCES[marketName];
-      if (dist && !opt.textContent.includes("km)")) {
-        opt.textContent = `${opt.textContent} · [${dist} km]`;
-        opt.setAttribute("data-dist", dist);
-      }
-    });
-
-    sel.addEventListener("change", function() {
-      const selectedOpt = sel.options[sel.selectedIndex];
-      if (!selectedOpt) return;
-      const d = selectedOpt.getAttribute("data-dist");
-      if (d && distInputId) {
-        const dInput = document.getElementById(distInputId);
-        if (dInput) {
-          dInput.value = d;
-          // Trigger calc button if available
-          const helperKey = distInputId.replace("dist-", "");
-          const applyBtn = document.getElementById("apply-dist-" + helperKey);
-          if (applyBtn) applyBtn.click();
-        }
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-      updateDistancesInDropdown(document.getElementById("live-market-select-a"), "dist-A");
-      updateDistancesInDropdown(document.getElementById("live-market-select-b"), "dist-B");
-      updateDistancesInDropdown(document.getElementById("market-a-name"), "dist-A");
-      updateDistancesInDropdown(document.getElementById("market-b-name"), "dist-B");
-    }, 1200);
-  });
-})();
