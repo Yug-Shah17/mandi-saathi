@@ -1,39 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#082f1e"/>
-      <stop offset="100%" stop-color="#04180f"/>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c1f"/>
     </linearGradient>
-    <linearGradient id="onion" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f59e0b"/>
-      <stop offset="50%" stop-color="#d97706"/>
-      <stop offset="100%" stop-color="#b45309"/>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
-    <linearGradient id="sprout" x1="0%" y1="100%" x2="0%" y2="0%">
+    <linearGradient id="leafGrad" x1="0%" y1="100%" x2="0%" y2="0%">
       <stop offset="0%" stop-color="#10b981"/>
       <stop offset="100%" stop-color="#34d399"/>
     </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
   </defs>
-  <!-- App Icon Background -->
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#10b981" stroke-width="6" stroke-opacity="0.35"/>
-  
-  <!-- Sprout / Leaf Stem -->
-  <path d="M256 120 C240 70, 210 50, 180 60 C180 100, 220 120, 256 130 Z" fill="url(#sprout)"/>
-  <path d="M256 120 C272 70, 302 50, 332 60 C332 100, 292 120, 256 130 Z" fill="url(#sprout)"/>
-  <line x1="256" y1="60" x2="256" y2="140" stroke="#059669" stroke-width="8" stroke-linecap="round"/>
 
-  <!-- Golden Onion Body -->
-  <path d="M256 130 C160 130, 96 210, 96 300 C96 390, 165 440, 256 440 C347 440, 416 390, 416 300 C416 210, 352 130, 256 130 Z" fill="url(#onion)"/>
-  <!-- Highlights & Layer Lines -->
-  <path d="M256 140 C200 170, 160 230, 160 300 C160 370, 200 420, 256 430" fill="none" stroke="#fef3c7" stroke-width="7" stroke-linecap="round" stroke-opacity="0.6"/>
-  <path d="M256 140 C312 170, 352 230, 352 300 C352 370, 312 420, 256 430" fill="none" stroke="#78350f" stroke-width="6" stroke-linecap="round" stroke-opacity="0.35"/>
-  <line x1="256" y1="140" x2="256" y2="435" stroke="#fef3c7" stroke-width="6" stroke-linecap="round" stroke-opacity="0.4"/>
-  
-  <!-- Rupee Symbol on Center of Onion -->
-  <text x="256" y="325" font-family="Arial, sans-serif" font-size="95" font-weight="900" fill="#ffffff" text-anchor="middle" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">₹</text>
-  
-  <!-- Root tuft -->
-  <path d="M240 440 L235 465 M256 440 L256 470 M272 440 L277 465" stroke="#fef3c7" stroke-width="6" stroke-linecap="round"/>
+  <!-- App Rounded Container -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#10b981" stroke-width="4" stroke-opacity="0.3"/>
+
+  <!-- Subtle Balance Scale Pillar (Agri-Fintech Fairness) -->
+  <path d="M256 120 L256 390" stroke="rgba(255,255,255,0.18)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M190 390 L322 390" stroke="rgba(255,255,255,0.22)" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Interlocking Golden Scales Beam -->
+  <path d="M140 180 Q256 160 372 180" stroke="url(#goldGrad)" stroke-width="12" stroke-linecap="round" fill="none" filter="url(#shadow)"/>
+
+  <!-- Left Scale Pan (Farm Sprout / Produce) -->
+  <line x1="140" y1="180" x2="110" y2="270" stroke="#fef3c7" stroke-width="4" stroke-opacity="0.8"/>
+  <line x1="140" y1="180" x2="170" y2="270" stroke="#fef3c7" stroke-width="4" stroke-opacity="0.8"/>
+  <path d="M96 270 Q140 295 184 270 Z" fill="url(#leafGrad)" filter="url(#shadow)"/>
+  <!-- Leaf inside left pan -->
+  <path d="M140 215 C130 235 125 255 140 268 C155 255 150 235 140 215 Z" fill="#ffffff" opacity="0.9"/>
+
+  <!-- Right Scale Pan (Rupee / Net Profit Realization) -->
+  <line x1="372" y1="180" x2="342" y2="250" stroke="#fef3c7" stroke-width="4" stroke-opacity="0.8"/>
+  <line x1="372" y1="180" x2="402" y2="250" stroke="#fef3c7" stroke-width="4" stroke-opacity="0.8"/>
+  <path d="M328 250 Q372 275 416 250 Z" fill="url(#goldGrad)" filter="url(#shadow)"/>
+  <!-- Rupee Symbol glowing in right pan -->
+  <text x="372" y="242" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="900" fill="#ffffff" text-anchor="middle" filter="url(#shadow)">₹</text>
+
+  <!-- Crown Sprout on Center Fulcrum -->
+  <circle cx="256" cy="165" r="14" fill="#fbbf24"/>
+  <path d="M256 160 C245 130 220 120 200 130 C205 155 235 160 256 165 Z" fill="url(#leafGrad)"/>
+  <path d="M256 160 C267 130 292 120 312 130 C307 155 277 160 256 165 Z" fill="url(#leafGrad)"/>
 </svg>
 
