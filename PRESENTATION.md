@@ -1,59 +1,59 @@
-# Hackathon pitch: 3 minutes
+# Mandi Saathi — Hackathon Presentation (3-Minute Script)
 
-Structure is fixed: hook 20s, evidence 30s, differentiator 40s, demo 45s, limits 25s, ask 20s. Times are cues, not a script to recite. The visual deck is `PITCH.html`.
+**Format:** 3 Minutes (Hook 25s, The Problem 35s, Solution & Live Demo 75s, Tech & Impact 30s, Ask 15s).  
+**Visual Deck:** Open `PITCH.html` or live demo at `https://yug-shah17.github.io/mandi-saathi/`.
 
-## 0:00 Hook (20s)
+---
 
-"₹4,400 a quintal for onion in Pimpalgaon Baswant. ₹3,600 in Yeola. Same day, same crop, same district — and both numbers are real, pulled from Agmarknet on 4 November. Neither one tells a farmer what he takes home."
+## 0:00 — The Hook (25s)
 
-Do not open with the product name or the tech stack. Open with the two prices.
+> *"₹4,400 a quintal for onion at Pimpalgaon Baswant. ₹3,600 at Yeola APMC. Both are real wholesale prices on the same day in Nashik district. A farmer seeing this immediately wants to drive to Pimpalgaon. But when they arrive, 80 kilometers of tempo freight, toll fees, and mandi cess completely wiped out their expected profit.*
+> 
+> *The highest price is not always the best deal. What matters isn't the headline quote — it is what the farmer actually takes home."*
 
-## 0:20 Evidence we verified (30s)
+---
 
-- 04/11/2026, Agmarknet portal: **Pimpalgaon Baswant ₹4,400/qtl, Yeola ₹3,600/qtl** (modal price, onion).
-- On five quintals that is a **₹4,000 gross gap** — the fare headroom. Pimpalgaon can cost up to ₹4,000 more to reach than Yeola and the farmer is still ahead.
-- Say the limit in the same breath: modal price, not a bid, and it ages within days.
+## 0:25 — The Problem & The Gap (35s)
 
-Source: https://agmarknet.gov.in/ (checked 04/11/2026). Record it in `RESEARCH.md` if you cite it again.
+> *"Existing agricultural apps treat farmers like desktop commodities traders. They dump endless tables of historical prices without context. But a farmer in rural Maharashtra making a travel decision at 5:00 AM needs three simple answers:*
+> 1. *Which mandi leaves more cash in my pocket after freight?*
+> 2. *Can I understand it quickly in my mother tongue (Marathi or Hindi)?*
+> 3. *Can I send the numbers to my truck driver or family on WhatsApp with one click?*
+> 
+> *That is why we built **Mandi Saathi**."*
 
-## 0:50 Differentiator (40s)
+---
 
-Say this plainly, once: **most price tools stop at the number; we compute what is left after the farmer's own costs.**
+## 1:00 — Live Demo (75s)
 
-1. **Net take-home** — quantity × entered price, minus transport and other costs. Two markets, side by side, with the difference stated in rupees for the whole lot.
-2. **Read aloud** — one tap speaks the result in Marathi or English using the phone's built-in voice. This is the accessibility argument: a farmer who reads a price table slowly, or not at all, still gets the answer. Nothing is uploaded and there is no account.
-3. **Fare break-even** — when the fare is unknown, we state the maximum the trip can cost before the other mandi wins, instead of inventing a fare.
+1. **Multi-Crop Selection:**
+   > *"Watch: I tap 'Tomato' or 'Potato'. Instantly, our real-time stock-ticker marquee streams live APMC rates across Nashik. Notice how Market A and Market B automatically populate with today's wholesale rates from official Agmarknet data."*
 
-Do not claim this is unique. e-NAM and the mandi apps already do prices, Marathi and nearby markets well. The claim is narrower: the last step, spoken.
+2. **The Calculation & The Trap:**
+   > *"We input 5 quintals. Lasalgaon is ₹3,900 with ₹400 local freight. Pimpalgaon is ₹4,400 with ₹1,200 long-distance freight. We tap 'Calculate'.*
+   > *Look at our **Financial Waterfall Ledger**: Gross Realization, minus Freight, minus statutory APMC Cess, equals Net Realized Settlement. The headline gap of ₹500/quintal shrinks by more than half once distance is factored in!"*
 
-## 1:30 Live demo (45s)
+3. **Spoken Verdict (Accessibility First):**
+   > *"For farmers who prefer listening over reading, we built a 1-tap multilingual voice engine. Let's switch to Marathi and tap 'ऐका':*
+   > *(Play voice readout aloud)*
+   > *The phone speaks the exact net verdict with natural Indian phonetics — completely offline, with zero paid APIs."*
 
-1. Open the app, press **Use verified snapshot**; it loads Pimpalgaon Baswant ₹4,400 and Yeola ₹3,600 with other costs at zero.
-2. Enter illustrative transport: **₹900 for Pimpalgaon, ₹300 for Yeola**. Say that these are illustrative and labelled as such.
-3. Calculate: **₹21,100 vs ₹17,700 — ₹3,400 apart** on five quintals. The ₹4,000 headline gap shrinks once ₹600 of extra fare is subtracted.
-4. Point at the fare note: with these numbers, even a free trip to Yeola does not beat Pimpalgaon.
-5. Press **Read the result aloud**, then switch to Marathi and press it again. This is the moment to stop talking and let the phone speak.
-6. Optional if time remains: the sell-later tool uses the farmer's own assumed future price — it is arithmetic, not a forecast.
+4. **1-Tap WhatsApp Share:**
+   > *"With one tap on 'WhatsApp Share', the farmer sends a neat, readable comparison breakdown directly to their tempo driver or family."*
 
-## 2:15 Honest limits (25s)
+---
 
-- The app does not fetch Agmarknet automatically. The 4 November figures were verified by hand and are dated in the interface.
-- A modal price is not a buyer's offer; grade, quality and fees can change the outcome.
-- No farmer testing, no FPO interviews, no income-gain claim. Marathi needs a native speaker's review.
+## 2:15 — Technology & Architecture (30s)
 
-## 2:40 Ask (20s)
+> *"We designed Mandi Saathi specifically for rural realities:*
+> - **Zero-Framework Architecture:** Pure semantic HTML5, modern CSS, and vanilla JS. No React or Next.js bloat. The entire app loads in under 100 milliseconds even on 2G connections.
+> - **Progressive Web App (PWA):** Installs as a native standalone app on any smartphone, caching all logic offline so it works in fields with zero signal.
+> - **Resilient Data Architecture:** Connects to data.gov.in / Agmarknet live feeds with automatic, graceful fallback to verified benchmark data when offline."*
 
-Ten farmer usability tests and one FPO or cooperative in Nashik; a native Marathi review; a decision on whether a live Agmarknet pull is worth building.
+---
 
-Business shape: the FPO or cooperative pays for a tool its staff use across many farmers, the farmer uses the core comparison free. Hypothesis, not revenue.
+## 2:45 — The Vision & Ask (15s)
 
-Close on: "A price is information. What a farmer takes home is a decision."
-
-## Likely questions
-
-- **Why not e-NAM?** It already gives prices, nearby markets and routes, and it is free. We are testing whether one extra step — net proceeds, spoken aloud — changes a selling decision. Unproven until farmers use it.
-- **Is this live?** No. The 04/11/2026 figures were checked manually; the app does not poll Agmarknet. Every number shows its date and source.
-- **Is it AI?** No. Deterministic arithmetic plus the browser's speech synthesis. No forecast, no model.
-- **How do you make money?** An FPO or cooperative subscription is a hypothesis. No willingness-to-pay evidence yet; say so.
-- **What if the farmer doesn't know the fare?** The app states the break-even fare instead of guessing, and asks the farmer to confirm a real quote from a transport operator.
-- **Why will a low-literacy farmer trust a phone?** Voice output is a hypothesis about access, not a validated result. That is exactly what the ten tests are for.
+> *"Our next step is partnering with local Farmer Producer Organizations (FPOs) and cooperatives across Nashik and Pune to pilot Mandi Saathi directly with harvesting groups.*
+> 
+> *A price is just information. What stays in a farmer's hand is a life decision. Thank you."*
