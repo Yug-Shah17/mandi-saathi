@@ -1,0 +1,31 @@
+{
+  "name": "Mandi Saathi | मंडी साथी",
+  "short_name": "MandiSaathi",
+  "description": "Maharashtra Onion Farmer Real-Time Net Take-Home & APMC Arbitrage Calculator",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#082f1e",
+  "theme_color": "#082f1e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Compare Mandis | तुलना",
+      "url": "/#compare",
+      "description": "Compare two APMC mandis"
+    },
+    {
+      "name": "Live Prices | थेट भाव",
+      "url": "/#top",
+      "description": "View official daily Agmarknet rates"
+    }
+  ]
+}
+
