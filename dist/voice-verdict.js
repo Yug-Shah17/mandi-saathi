@@ -247,31 +247,43 @@
     });
 
     const utterance = new SpeechSynthesisUtterance(processedText);
-    utterance.rate = 0.88;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
 
-    // Pick best matching voice for Indian languages
+    // Pick best natural voice from browser voices
     const voices = window.speechSynthesis.getVoices() || [];
     let chosenVoice = null;
 
     if (lang === 'mr') {
-      // 1. Try Marathi voice
-      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('mr') || v.name.toLowerCase().includes('marathi'));
-      // 2. Fall back to Hindi voice (handles Devanagari script smoothly on Windows)
+      // 1. Marathi specific
+      chosenVoice = voices.find(v => v.lang && (v.lang.toLowerCase() === 'mr-in' || v.lang.toLowerCase().startsWith('mr')));
+      // 2. Hindi natural (Google हिन्दी, Microsoft Swara / Madhur) - fluent Devanagari pronunciation
       if (!chosenVoice) {
-        chosenVoice = voices.find(v => v.lang.toLowerCase().includes('hi') || v.name.toLowerCase().includes('hindi'));
+        chosenVoice = voices.find(v => v.name && (v.name.includes('Swara') || v.name.includes('Madhur') || v.name.toLowerCase().includes('google hindi')));
       }
-      // 3. Fall back to Indian English voice
       if (!chosenVoice) {
-        chosenVoice = voices.find(v => v.lang.toLowerCase().includes('in'));
+        chosenVoice = voices.find(v => v.lang && (v.lang.toLowerCase() === 'hi-in' || v.lang.toLowerCase().startsWith('hi')));
       }
       utterance.lang = chosenVoice ? chosenVoice.lang : 'hi-IN';
     } else if (lang === 'hi') {
-      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('hi') || v.name.toLowerCase().includes('hindi')) ||
-                    voices.find(v => v.lang.toLowerCase().includes('in'));
+      // 1. Natural Hindi voices
+      chosenVoice = voices.find(v => v.name && (v.name.includes('Swara') || v.name.includes('Madhur') || v.name.toLowerCase().includes('google hindi')));
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.lang && (v.lang.toLowerCase() === 'hi-in' || v.lang.toLowerCase().startsWith('hi')));
+      }
       utterance.lang = chosenVoice ? chosenVoice.lang : 'hi-IN';
     } else {
-      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('en-in') || v.name.toLowerCase().includes('india')) ||
-                    voices.find(v => v.lang.toLowerCase().startsWith('en'));
+      // English: Prefer natural Indian English or Google/Microsoft natural voices over robotic generic desktop voices
+      chosenVoice = voices.find(v => v.name && (v.name.includes('Neerja') || v.name.includes('Prabhat') || v.name.toLowerCase().includes('natural')));
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.lang && v.lang.toLowerCase() === 'en-in');
+      }
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.name && v.name.toLowerCase().includes('google') && v.lang.startsWith('en'));
+      }
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+      }
       utterance.lang = chosenVoice ? chosenVoice.lang : 'en-IN';
     }
 
