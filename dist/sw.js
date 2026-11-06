@@ -1,5 +1,5 @@
 // sw.js: Service Worker for 100% Offline Resilience & Immediate Updates
-const CACHE_NAME = 'mandi-saathi-v5.1';
+const CACHE_NAME = 'mandi-saathi-v5.2';
 
 const OFFLINE_URLS = [
   '/',

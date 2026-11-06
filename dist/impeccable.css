@@ -9911,3 +9911,22 @@ button.submit:active, .cta:active {
 }
 
 
+
+/* In-Card Market Dropdowns */
+#live-market-select-a, #live-market-select-b {
+  width: 100% !important;
+  cursor: pointer !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  background-color: #f0fdf4 !important;
+  border: 1.5px solid #059669 !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  margin-top: 4px !important;
+  color: #064e3b !important;
+}
+
+#live-market-select-a:focus, #live-market-select-b:focus {
+  border-color: #047857 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+}
