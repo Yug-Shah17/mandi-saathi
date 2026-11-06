@@ -109,7 +109,7 @@ function shareMessage(){
 function openShare(){
   const text=shareMessage();
   if(!text)return;
-  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener');
+  window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(text), '_blank');
 }
 
 function show(){

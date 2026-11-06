@@ -38,18 +38,24 @@
     const nameB = document.getElementById("nameB").value;
     const priceB = document.getElementById("priceB").value;
     const qty = document.getElementById("quantity").value;
+    const crop = document.getElementById("crop") ? document.getElementById("crop").value : "Onion";
 
-    const cards = document.querySelectorAll(".result-card");
     let netA = "", netB = "";
-    if (cards.length >= 2) {
-      netA = cards[0].querySelector("strong") ? cards[0].querySelector("strong").textContent : "";
-      netB = cards[1].querySelector("strong") ? cards[1].querySelector("strong").textContent : "";
+    const nums = document.querySelectorAll(".ledger-row.total .num");
+    if (nums.length >= 2) {
+      netA = nums[0].textContent;
+      netB = nums[1].textContent;
+    } else {
+      const cards = document.querySelectorAll(".result-card");
+      if (cards.length >= 2) {
+        netA = cards[0].querySelector("strong") ? cards[0].querySelector("strong").textContent : "";
+        netB = cards[1].querySelector("strong") ? cards[1].querySelector("strong").textContent : "";
+      }
     }
 
     if (isMarathi) {
       return `🌾 *मंडी साथी - बाजार तुलना हिशोब*\n` +
-             `📅 दिनांक: 04/11/2026 (अधिकृत ॲगमार्कनेट)\n` +
-             `📦 एकूण माल: ${qty} क्विंटल कांदा\n\n` +
+             `📦 एकूण माल: ${qty} क्विंटल ${crop}\n\n` +
              `📍 *१. ${nameA}*\n` +
              `• भाव: ₹${priceA}/क्विंटल\n` +
              `• खर्च वजा जाता हातात: *${netA}*\n\n` +
@@ -60,8 +66,7 @@
              `_मंडी साथी - जाण्यापूर्वी हिशोब करा!_`;
     } else {
       return `🌾 *Mandi Saathi - Market Comparison Summary*\n` +
-             `📅 Date: 04/11/2026 (Official Agmarknet)\n` +
-             `📦 Lot Size: ${qty} Quintals Onion\n\n` +
+             `📦 Lot Size: ${qty} Quintals ${crop}\n\n` +
              `📍 *1. ${nameA}*\n` +
              `• Rate: ₹${priceA}/Q\n` +
              `• Net In-Hand: *${netA}*\n\n` +

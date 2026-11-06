@@ -257,6 +257,7 @@
     const tickerBar = document.getElementById('mandi-ticker-bar');
     if (tickerBar) {
       tickerBar.classList.remove('ticker-hidden');
+      tickerBar.style.display = 'flex';
       const track = tickerBar.querySelector('.ticker-track');
       if (track) populateTrack(track, crop);
       const badgeText = document.getElementById('ticker-badge-text');
