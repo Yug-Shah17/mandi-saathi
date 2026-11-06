@@ -239,18 +239,55 @@
 
   function fallbackSpeechSynthesis(rawText, lang) {
     if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+
     const processedText = rawText.replace(/\b\d+\b/g, match => {
       const n = parseInt(match, 10);
       return numberToWords(n, lang);
     });
 
     const utterance = new SpeechSynthesisUtterance(processedText);
-    utterance.lang = lang === 'mr' ? 'mr-IN' : lang === 'hi' ? 'hi-IN' : 'en-IN';
-    utterance.rate = 0.92;
+    utterance.rate = 0.88;
+
+    // Pick best matching voice for Indian languages
+    const voices = window.speechSynthesis.getVoices() || [];
+    let chosenVoice = null;
+
+    if (lang === 'mr') {
+      // 1. Try Marathi voice
+      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('mr') || v.name.toLowerCase().includes('marathi'));
+      // 2. Fall back to Hindi voice (handles Devanagari script smoothly on Windows)
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.lang.toLowerCase().includes('hi') || v.name.toLowerCase().includes('hindi'));
+      }
+      // 3. Fall back to Indian English voice
+      if (!chosenVoice) {
+        chosenVoice = voices.find(v => v.lang.toLowerCase().includes('in'));
+      }
+      utterance.lang = chosenVoice ? chosenVoice.lang : 'hi-IN';
+    } else if (lang === 'hi') {
+      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('hi') || v.name.toLowerCase().includes('hindi')) ||
+                    voices.find(v => v.lang.toLowerCase().includes('in'));
+      utterance.lang = chosenVoice ? chosenVoice.lang : 'hi-IN';
+    } else {
+      chosenVoice = voices.find(v => v.lang.toLowerCase().includes('en-in') || v.name.toLowerCase().includes('india')) ||
+                    voices.find(v => v.lang.toLowerCase().startsWith('en'));
+      utterance.lang = chosenVoice ? chosenVoice.lang : 'en-IN';
+    }
+
+    if (chosenVoice) {
+      utterance.voice = chosenVoice;
+    }
 
     if (voiceBtn) voiceBtn.classList.add("playing");
-    utterance.onend = () => { if (voiceBtn) voiceBtn.classList.remove("playing"); };
-    utterance.onerror = () => { if (voiceBtn) voiceBtn.classList.remove("playing"); };
+    utterance.onend = () => { 
+      if (voiceBtn) voiceBtn.classList.remove("playing");
+      if (voiceStatus) voiceStatus.textContent = "";
+    };
+    utterance.onerror = () => { 
+      if (voiceBtn) voiceBtn.classList.remove("playing");
+      if (voiceStatus) voiceStatus.textContent = "";
+    };
 
     window.speechSynthesis.speak(utterance);
   }
