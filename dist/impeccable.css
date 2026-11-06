@@ -10243,6 +10243,66 @@ button.submit:active, .cta:active {
   font-size: 15px !important;
 }
 
+/* ============================================================
+   TYPOGRAPHY ELEVATION & LEGEND BOUNDARY FIX
+   ============================================================ */
+
+/* 1. Ultra-clean, modern, premium typographic hierarchy */
+body, button, input, select {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+h1, .hero h1 {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.15 !important;
+  color: #064e3b !important;
+}
+
+h2, h3, .section-heading h2 {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  color: #0f172a !important;
+}
+
+.hero .intro {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  color: #4b5563 !important;
+  line-height: 1.65 !important;
+}
+
+/* 2. Fix Market A & Market B Box Boundary Alignment */
+.market-grid fieldset {
+  position: relative !important;
+  padding-top: 24px !important;
+  margin-top: 10px !important;
+}
+
+.market-grid legend {
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: #ffffff !important;
+  padding: 4px 14px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(6, 78, 59, 0.15) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #064e3b !important;
+  margin-left: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.market-grid legend span:first-child {
+  color: #059669 !important;
+  font-weight: 800 !important;
+}
+
 @media (max-width: 840px) {
   .hero {
     grid-template-columns: 1fr !important;
